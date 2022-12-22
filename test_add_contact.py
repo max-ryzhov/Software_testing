@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from contact_param import ContactParam
 
 
-class TestAddGroup(unittest.TestCase):
+class TestAddContact(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(30)
