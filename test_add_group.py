@@ -9,24 +9,6 @@ class TestAddGroup(unittest.TestCase):
         self.wd = WebDriver()
         self.wd.implicitly_wait(30)
 
-    def test_add_group(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, user_name="admin", password="secret")
-        self.open_group_page(wd)
-        self.create_new_group(wd, GroupParam(group_name="Meeting", header="Hello", footer="Bye"))
-        self.return_to_group_page(wd)
-        self.logout(wd)
-
-    def test_add_empty_group(self):
-        wd = self.wd    # driver link
-        self.open_home_page(wd)
-        self.login(wd, user_name="admin", password="secret")
-        self.open_group_page(wd)
-        self.create_new_group(wd, GroupParam(group_name="", header="", footer=""))
-        self.return_to_group_page(wd)
-        self.logout(wd)
-
     def open_home_page(self, wd):
         wd.get("http://localhost/addressbook/")
 
@@ -63,6 +45,24 @@ class TestAddGroup(unittest.TestCase):
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
+
+    def test_add_group(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, user_name="admin", password="secret")
+        self.open_group_page(wd)
+        self.create_new_group(wd, GroupParam(group_name="Meeting", header="Hello", footer="Bye"))
+        self.return_to_group_page(wd)
+        self.logout(wd)
+
+    def test_add_empty_group(self):
+        wd = self.wd    # driver link
+        self.open_home_page(wd)
+        self.login(wd, user_name="admin", password="secret")
+        self.open_group_page(wd)
+        self.create_new_group(wd, GroupParam(group_name="", header="", footer=""))
+        self.return_to_group_page(wd)
+        self.logout(wd)
 
     def tearDown(self):
         self.wd.quit()
