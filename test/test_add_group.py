@@ -12,12 +12,12 @@ def app(request):
 
 
 def test_add_group(app):
-    app.login(user_name="admin", password="secret")
+    app.session.login(user_name="admin", password="secret")    # .session т.к. login перенесли в fixture.session
     app.create_new_group(GroupParam(group_name="Meeting", header="Hello", footer="Bye"))
-    app.logout()
+    app.session.logout()
 
 
 def test_add_empty_group(app):
-    app.login(user_name="admin", password="secret")
+    app.session.login(user_name="admin", password="secret")
     app.create_new_group(GroupParam(group_name="", header="", footer=""))
-    app.logout()
+    app.session.logout()
