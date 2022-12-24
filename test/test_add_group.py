@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
-from group_param import GroupParam
-from application.application import Application
+from model.group_param import GroupParam
+from fixture.application import Application
 
 
 @pytest.fixture

@@ -1,5 +1,4 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
-from group_param import GroupParam
 
 
 class Application:

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 from selenium.webdriver.chrome.webdriver import WebDriver
-from contact_param import ContactParam
+from model.contact_param import ContactParam
 
 
 class TestAddContact(unittest.TestCase):
