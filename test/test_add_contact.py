@@ -5,8 +5,8 @@ from fixture.application import Application
 
 
 @pytest.fixture
-def app(request):
-    fixture = Application()
+def app(request):    # грубо app = Application()
+    fixture = Application()    # фикстура - экземпляр класса Application, созданный перед запуском теста.
     request.addfinalizer(fixture.destroy)
     return fixture
 

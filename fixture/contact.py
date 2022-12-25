@@ -1,15 +1,11 @@
 class ContactHelper:
 
     def __init__(self, app):
-        self.app = app    # ссылка на объект класса Application
-
-    def open_home_page(self):
-        wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.app = app    # экземпляр кл ContactHelper принимает св-во - фикстуру app(экземпляр кл Application)
 
     def create(self, contact_param):
         wd = self.app.wd
-        self.open_home_page()
+        self.app.open_home_page()
         # init creation
         wd.find_element_by_link_text("add new").click()
         # fill contact form

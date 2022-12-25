@@ -1,7 +1,7 @@
 class GroupHelper:
 
     def __init__(self, app):
-        self.app = app    # ссылка на объект класса Application
+        self.app = app    # экземпляр кл GroupHelper принимает св-во - фикстуру app(экземпляр кл Application)
 
     def open_group_page(self):
         wd = self.app.wd
