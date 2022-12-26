@@ -1,3 +1,6 @@
+from time import sleep
+
+
 class GroupHelper:
 
     def __init__(self, app):
@@ -24,6 +27,16 @@ class GroupHelper:
         wd.find_element_by_name("group_footer").send_keys(group_param.footer)
         # submit new creation
         wd.find_element_by_name("submit").click()
+        self.return_to_group_page()
+
+    def delete_first_group(self):
+        wd = self.app.wd
+        self.open_group_page()
+        # select first group
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        sleep(.5)
+        wd.find_element_by_name("delete").click()
         self.return_to_group_page()
 
     def return_to_group_page(self):
