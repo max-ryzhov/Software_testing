@@ -36,7 +36,7 @@ class ContactHelper:
     def fill_contact_form(self, contact_param):
         wd = self.app.wd
         wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("lastname").clear()
+        wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact_param.firstname)
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
