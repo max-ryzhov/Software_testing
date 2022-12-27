@@ -29,7 +29,7 @@ class GroupHelper:
         wd.find_element_by_name("submit").click()
         self.return_to_group_page()
 
-    def delete_first_group(self):
+    def delete_first(self):
         wd = self.app.wd
         self.open_group_page()
         # select first group
