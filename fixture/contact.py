@@ -1,3 +1,6 @@
+from time import sleep
+
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -35,6 +38,19 @@ class ContactHelper:
         wd.find_element_by_name("middlename").send_keys(contact_param.middlename)
         # submit new creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.return_to_home_page()
+
+    def del_first_contact(self):
+        wd = self.app.wd
+    # переход на стр контактов
+        self.app.open_home_page()
+    # выбор первого контакта
+        wd.find_element_by_name('selected[]').click()
+    # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+    # подтверждение удаления
+        wd.switch_to.alert.accept()
+    # возврат на главную
         self.return_to_home_page()
 
     def return_to_home_page(self):
