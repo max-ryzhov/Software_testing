@@ -25,20 +25,6 @@ class ContactHelper:
         wd.find_element_by_xpath("//div[@id='content']/form/input[22]").click()
         self.return_to_home_page()
 
-    def delete_first(self):
-        wd = self.app.wd
-        self.app.open_home_page()
-        wd.find_element_by_name('selected[]').click()
-        wd.find_element_by_xpath("//input[@value='Delete']").click()
-        wd.switch_to.alert.accept()
-        self.return_to_home_page()
-
-    def view_first(self):
-        wd = self.app.wd
-        self.app.open_home_page()
-        wd.find_element_by_xpath("//img[@alt='Details']").click()
-        self.return_to_home_page()
-
     def fill_contact_form(self, contact_param):
         wd = self.app.wd
         wd.find_element_by_name("firstname").click()
@@ -69,13 +55,27 @@ class ContactHelper:
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys(contact_param.email)
 
-        # wd.find_element_by_name("bday").click()
-        # wd.find_element_by_name("bday").select_by_visible_text("10")
-        # wd.find_element_by_name("bmonth").click()
-        # wd.find_element_by_name("bmonth").select_by_visible_text("June")
-        # wd.find_element_by_name("byear").click()
-        # wd.find_element_by_name("byear").clear()
-        # wd.find_element_by_name("byear").send_keys("1990")
+    def delete_first(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_name('selected[]').click()
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to.alert.accept()
+        self.return_to_home_page()
+
+    def view_first(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_xpath("//img[@alt='Details']").click()
+        self.return_to_home_page()
+
+    def add_to_group(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_name('selected[]').click()
+        wd.find_element_by_name("add").click()
+        wd.find_element_by_xpath("//*[contains(text(), 'group page')]").click()
+        self.return_to_home_page()
 
     def return_to_home_page(self):
         wd = self.app.wd
