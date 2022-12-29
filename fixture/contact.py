@@ -33,6 +33,12 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.return_to_home_page()
 
+    def view_first(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_xpath("//img[@alt='Details']").click()
+        self.return_to_home_page()
+
     def fill_contact_form(self, contact_param):
         wd = self.app.wd
         wd.find_element_by_name("firstname").click()
