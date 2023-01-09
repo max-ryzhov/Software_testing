@@ -8,7 +8,7 @@ class Application:
 
     def __init__(self):
         self.wd = WebDriver()  # ссылка на веб-драйвер
-        self.wd.implicitly_wait(30)
+        self.wd.implicitly_wait(5)
         # ссылки на помощники:
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
@@ -16,7 +16,7 @@ class Application:
 
     def isvalid(self):
         try:
-            self.wd.current_url()
+            self.wd.current_url
             return True
         except:
             return False
