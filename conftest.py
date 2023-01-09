@@ -1,5 +1,4 @@
 import pytest
-from time import sleep
 from fixture.application import Application
 
 
@@ -21,7 +20,6 @@ def app(request):
 @pytest.fixture(scope='session', autouse=True)
 def stop(request):
     def fin():
-        sleep(1)
         fixture.session.ensure_logout()
         fixture.destroy()
     request.addfinalizer(fin)
