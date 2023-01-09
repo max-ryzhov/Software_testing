@@ -2,11 +2,6 @@
 def test_del_first_contact(app):
     app.contact.delete_first()
 
-
-
-
-
-    # i = 10
-    # while i > 0:
-    #     app.contact.del_first_contact()
+    # for i in range(10):
+    #     app.contact.delete_first()
     #     i -= 1

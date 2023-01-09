@@ -8,7 +8,7 @@ class Application:
 
     def __init__(self):
         self.wd = WebDriver()  # ссылка на веб-драйвер
-        self.wd.implicitly_wait(5)
+        self.wd.implicitly_wait(2)
         # ссылки на помощники:
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
