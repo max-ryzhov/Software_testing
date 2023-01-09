@@ -12,4 +12,3 @@ def test_add_contact2(app):
     app.contact.create(ContactParam(firstname="Петя", lastname="Иванов", middlename="Nick", nickname="pet",
                                     address="Spb", company="Ya", mobile="+79993330011", email="pet@gmail.com",
                                     title='Good'))
-
