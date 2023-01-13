@@ -19,14 +19,13 @@ def test_modify_group_name(app):
 def test_modify_group_name2(app):
     if app.group.count() == 0:    # если групп нет, то создать
         app.group.create(GroupParam(group_name="For modify2"))
-    old_groups = app.group.get_group_list()    # сохранил список групп до модификации
+    old_groups = app.group.get_group_list()
     # Сразу передаю id 1й групп в конструктор mod_group
     mod_group = GroupParam(group_name="Second modification", group_id=old_groups[0].group_id)
-    app.group.modify_first_group(mod_group)    # модифицирую 1ю группу
-    new_groups = app.group.get_group_list()  # фактический список групп с веб станицы после модификации
+    app.group.modify_first_group(mod_group)
+    new_groups = app.group.get_group_list()
     assert len(old_groups) == len(new_groups)
-    old_groups[0] = mod_group    # формирую список путем замены 1й группы старого списка на mod_group
-    # сравниваем список, "какой должен быть по коду", с фактическим списком с веб страницы
+    old_groups[0] = mod_group
     assert sorted(old_groups, key=GroupParam.id_or_max) == sorted(new_groups, key=GroupParam.id_or_max)
 #
 #
