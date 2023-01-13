@@ -1,4 +1,5 @@
 from time import sleep
+from model.contact_param import ContactParam
 
 
 class ContactHelper:
@@ -76,9 +77,24 @@ class ContactHelper:
         self.app.open_home_page()
         return len(wd.find_elements_by_name('selected[]'))
 
+    # def get_contact_list(self):
+    #     wd = self.app.wd
+    #     contact_list = []
+    #     for element in wd.find_elements_by_name('selected[]'):
+    #         contact_list.append(element)
+    #     return contact_list
+
     def get_contact_list(self):
         wd = self.app.wd
+        self.app.open_home_page()
         contact_list = []
-        for element in wd.find_elements_by_name('selected[]'):
-            contact_list.append(element)
+
+        # for element in wd.find_elements_by_name('selected[]'):
+        # for element in wd.find_elements_by_css_selector('td.centre'):
+        for element in wd.find_elements_by_name('entry'):
+            index = element.find_element_by_name("selected[]").get_attribute('value')
+            f_name = element.find_element_by_xpath("//td[2]").text
+            l_name = element.find_element_by_xpath("//td[3]").text
+
+            contact_list.append(ContactParam(cont_id=index, firstname=f_name, lastname=l_name))
         return contact_list
