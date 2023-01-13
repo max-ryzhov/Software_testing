@@ -93,8 +93,7 @@ class ContactHelper:
         # for element in wd.find_elements_by_css_selector('td.centre'):
         for element in wd.find_elements_by_name('entry'):
             index = element.find_element_by_name("selected[]").get_attribute('value')
-            f_name = element.find_element_by_xpath("//td[2]").text
-            l_name = element.find_element_by_xpath("//td[3]").text
-
+            f_name = element.find_element_by_xpath("//td[3]").text
+            l_name = element.find_element_by_xpath("//td[2]").text
             contact_list.append(ContactParam(cont_id=index, firstname=f_name, lastname=l_name))
         return contact_list
