@@ -1,4 +1,5 @@
 from time import sleep
+from model.group_param import GroupParam
 
 
 class GroupHelper:
@@ -67,3 +68,15 @@ class GroupHelper:
         wd = self.app.wd
         self.open_group_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_group_list(self):
+        wd = self.app.wd
+        self.open_group_page()
+        group_list = []
+        for element in wd.find_elements_by_css_selector('span.group'):
+            text = element.text
+            index = element.find_element_by_name("selected[]").get_attribute('value')
+            group_list.append(GroupParam(group_name=text, group_id=index))
+        return group_list
+
+

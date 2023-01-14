@@ -3,8 +3,20 @@ from model.group_param import GroupParam
 
 
 def test_add_group(app):
-    app.group.create(GroupParam(group_name="Meeting1", header="Hello1", footer="Bye1"))
+    old_groups = app.group.get_group_list()
+    added_group = GroupParam(group_name="Meeting1", header="Hello1", footer="Bye1")
+    app.group.create(added_group)
+    new_groups = app.group.get_group_list()
+    assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(added_group)
+    assert sorted(old_groups, key=GroupParam.id_or_max) == sorted(new_groups, key=GroupParam.id_or_max)
 
 
-def test_add_empty_group(app):
-    app.group.create(GroupParam(group_name="1", header="2", footer="3"))
+def test_add_second_group(app):
+    old_groups = app.group.get_group_list()
+    added_group = GroupParam(group_name="1", header="2", footer="3")
+    app.group.create(added_group)
+    new_groups = app.group.get_group_list()
+    assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(added_group)
+    assert sorted(old_groups, key=GroupParam.id_or_max) == sorted(new_groups, key=GroupParam.id_or_max)
