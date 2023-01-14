@@ -24,10 +24,8 @@ class ContactParam:
         return (self.cont_id == other.cont_id or self.cont_id is None or other.cont_id is None) \
                and self.firstname == other.firstname and self.lastname == other.lastname
 
-
-    # def id_or_max(self):
-    #     if self.group_id:    # обращаемся к группе из списка и проверяем, что group_id - true сущность
-    #         return int(self.group_id)    # возвращаем group_id, переведенное в число
-    #     else:    # None - не true сущность
-    #         return maxsize
-    #
+    def id_or_max(self):
+        if self.cont_id:    # обращаемся к контакту из списка и проверяем, что cont_id - true сущность
+            return int(self.cont_id)    # возвращаем cont_id, переведенное в число
+        else:    # None - не true сущность
+            return maxsize
