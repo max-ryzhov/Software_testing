@@ -1,7 +1,7 @@
 from sys import maxsize
 
 
-class GroupParam:
+class GroupConstruct:
     def __init__(self, group_name=None, header=None, footer=None, group_id=None):
         self.group_name = group_name
         self.header = header
