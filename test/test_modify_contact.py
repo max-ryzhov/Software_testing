@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from random import randrange
 from model.contact_construct import Contact
 
 
@@ -8,12 +9,10 @@ def test_update_contact(app):
     mod_contact = Contact(firstname="mod_name", lastname="mod_lastname", address="mod_address", mobile="+0000",
                           email="mod@gmail.com", title_user='Good')
     old_contacts = app.contact.get_contact_list()
-    mod_contact.cont_id = old_contacts[0].cont_id    # записываю в мод.группу ID старой группы с веб-страницы
-    app.contact.update_first(mod_contact)
+    index = randrange(len(old_contacts))
+    mod_contact.cont_id = old_contacts[index].cont_id    # записываю в мод.группу ID старой группы с веб-страницы
+    app.contact.modify_contact_by_index(index, mod_contact)
     assert len(old_contacts) == app.contact.count()
     mod_contacts = app.contact.get_contact_list()
-    assert len(old_contacts) == len(mod_contacts)
-    old_contacts[0] = mod_contact
+    old_contacts[index] = mod_contact
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(mod_contacts, key=Contact.id_or_max)
-
-
