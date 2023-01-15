@@ -10,8 +10,16 @@ def test_add_contact(app):
     app.contact.create(added_contact)
     new_contacts = app.contact.get_contact_list()
     assert len(old_contacts) + 1 == len(new_contacts)
+    old_contacts.append(added_contact)
+    assert sorted(old_contacts, key=ContactParam.id_or_max) == sorted(new_contacts, key=ContactParam.id_or_max)
 
 
-def test_add_contact2(app):
-    app.contact.create(ContactParam(firstname="Петя", lastname="Иванов", middlename="Nick", nickname="pet"))
 
+
+
+
+
+
+# def test_add_contact2(app):
+#     app.contact.create(ContactParam(firstname="Петя", lastname="Иванов", middlename="Nick", nickname="pet"))
+#
