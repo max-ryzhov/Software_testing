@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from model.group_param import GroupParam
+from model.group_construct import Group
 
 
 def test_delete_first_group(app):
     if app.group.count() == 0:
-        app.group.create(GroupParam(group_name="test_delete"))
+        app.group.create(Group(group_name="test_delete"))
     old_groups = app.group.get_group_list()
     app.group.delete_first()
     new_groups = app.group.get_group_list()
