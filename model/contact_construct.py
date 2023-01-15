@@ -1,7 +1,7 @@
 from sys import maxsize
 
 
-class ContactConstruct:
+class Contact:
     def __init__(self, cont_id=None, firstname=None, lastname=None, middlename=None, nickname=None, title_user=None,
                  address=None, company=None, mobile=None, email=None):
         self.cont_id = cont_id

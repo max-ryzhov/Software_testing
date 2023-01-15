@@ -1,5 +1,5 @@
 from time import sleep
-from model.group_construct import GroupConstruct
+from model.group_construct import Group
 
 
 class GroupHelper:
@@ -76,7 +76,7 @@ class GroupHelper:
         for element in wd.find_elements_by_css_selector('span.group'):
             text = element.text
             index = element.find_element_by_name("selected[]").get_attribute('value')
-            group_list.append(GroupConstruct(group_name=text, group_id=index))
+            group_list.append(Group(group_name=text, group_id=index))
         return group_list
 
 
