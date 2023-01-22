@@ -45,8 +45,11 @@ class ContactHelper:
         self.change_field_value('title', contact_param.title_user)
         self.change_field_value('address', contact_param.address)
         self.change_field_value('company', contact_param.company)
-        self.change_field_value('mobile', contact_param.mobile)
         self.change_field_value('email', contact_param.email)
+        self.change_field_value('home', contact_param.homephone)
+        self.change_field_value('mobile', contact_param.mobilephone)
+        self.change_field_value('work', contact_param.workphone)
+        self.change_field_value('fax', contact_param.faxphone)
 
     def change_field_value(self, field_name, field_value):
         wd = self.app.wd
