@@ -26,15 +26,35 @@ class ContactHelper:
     def modify_contact_by_index(self, index, contact_param):
         wd = self.app.wd
         self.app.open_home_page()
-        self.select_contact_by_index(index)
+        self.open_contact_edit_page_by_index(index)
         self.fill_contact_form(contact_param)
         wd.find_element_by_xpath("//div[@id='content']/form/input[22]").click()
         self.return_to_home_page()
         self.contact_cache = None
 
-    def select_contact_by_index(self, index):
+    def open_contact_edit_page_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
+
+    def view_contact_by_index(self, index):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name('entry')[index]    # выбрал ряд
+        row.find_element_by_xpath(".//td[7]").click()    # кнопка просмотр в 7м столбце
+        sleep(2)
+
+    def get_contact_from_edit_page(self, index):
+        wd = self.app.wd
+        self.open_contact_edit_page_by_index(index)
+        firstname = wd.find_elements_by_name('firstname').get_attribute('value')
+        lastname = wd.find_elements_by_name('lastname').get_attribute('value')
+        cont_id = wd.find_elements_by_name('id').get_attribute('value')
+        homephone = wd.find_elements_by_name('home').get_attribute('value')
+        workphone = wd.find_elements_by_name('work').get_attribute('value')
+        mobilephone = wd.find_elements_by_name('mobile').get_attribute('value')
+        faxphone = wd.find_elements_by_name('fax').get_attribute('value')
+        return Contact(firstname=firstname, lastname=lastname, cont_id=cont_id,
+                       homephone=homephone, workphone=workphone, mobilephone=mobilephone, faxphone=faxphone)
 
     def fill_contact_form(self, contact_param):
         wd = self.app.wd
@@ -70,12 +90,6 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.return_to_home_page()
         self.contact_cache = None
-
-    def view_first(self):
-        wd = self.app.wd
-        self.app.open_home_page()
-        wd.find_element_by_xpath("//img[@alt='Details']").click()
-        self.return_to_home_page()
 
     def add_to_group(self):
         wd = self.app.wd
