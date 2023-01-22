@@ -46,13 +46,13 @@ class ContactHelper:
     def get_contact_from_edit_page(self, index):
         wd = self.app.wd
         self.open_contact_edit_page_by_index(index)
-        firstname = wd.find_elements_by_name('firstname').get_attribute('value')
-        lastname = wd.find_elements_by_name('lastname').get_attribute('value')
-        cont_id = wd.find_elements_by_name('id').get_attribute('value')
-        homephone = wd.find_elements_by_name('home').get_attribute('value')
-        workphone = wd.find_elements_by_name('work').get_attribute('value')
-        mobilephone = wd.find_elements_by_name('mobile').get_attribute('value')
-        faxphone = wd.find_elements_by_name('fax').get_attribute('value')
+        firstname = wd.find_element_by_name('firstname').get_attribute('value')
+        lastname = wd.find_element_by_name('lastname').get_attribute('value')
+        cont_id = wd.find_element_by_name('id').get_attribute('value')
+        homephone = wd.find_element_by_name('home').get_attribute('value')
+        workphone = wd.find_element_by_name('work').get_attribute('value')
+        mobilephone = wd.find_element_by_name('mobile').get_attribute('value')
+        faxphone = wd.find_element_by_name('fax').get_attribute('value')
         return Contact(firstname=firstname, lastname=lastname, cont_id=cont_id,
                        homephone=homephone, workphone=workphone, mobilephone=mobilephone, faxphone=faxphone)
 
@@ -120,5 +120,10 @@ class ContactHelper:
                 index = element.find_element_by_name("selected[]").get_attribute('value')
                 f_name = element.find_element_by_xpath(".//td[3]").text
                 l_name = element.find_element_by_xpath(".//td[2]").text
-                self.contact_cache.append(Contact(cont_id=index, firstname=f_name, lastname=l_name))
+                all_phones = element.find_element_by_xpath(".//td[6]").text    # получаем строку с 4 переносами
+                list_phones = all_phones.splitlines()    # получаем список по строкам
+                self.contact_cache.append(Contact(cont_id=index, firstname=f_name, lastname=l_name,
+                                                  homephone=list_phones[0], mobilephone=list_phones[1],
+                                                  workphone=list_phones[2]))
+                # , faxphone=list_phones[3]
         return self.contact_cache
