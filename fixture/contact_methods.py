@@ -51,8 +51,8 @@ class ContactHelper:
         homephone = re.search('H: (.*)', text).group(1)
         workphone = re.search('W: (.*)', text).group(1)
         mobilephone = re.search('M: (.*)', text).group(1)
-#        faxphone =  = re.search('P: (.*)', text).group(1)
-        return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone)
+        secondphone = re.search('P: (.*)', text).group(1)
+        return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondphone=secondphone)
 
     def get_contact_from_edit_page(self, index):
         wd = self.app.wd
@@ -63,9 +63,9 @@ class ContactHelper:
         homephone = wd.find_element_by_name('home').get_attribute('value')
         workphone = wd.find_element_by_name('work').get_attribute('value')
         mobilephone = wd.find_element_by_name('mobile').get_attribute('value')
-        faxphone = wd.find_element_by_name('fax').get_attribute('value')
+        secondphone = wd.find_element_by_name('phone2').get_attribute('value')
         return Contact(firstname=firstname, lastname=lastname, cont_id=cont_id,
-                       homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondphone=faxphone)
+                       homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondphone=secondphone)
 
     def fill_contact_form(self, contact_param):
         wd = self.app.wd
@@ -80,7 +80,7 @@ class ContactHelper:
         self.change_field_value('home', contact_param.homephone)
         self.change_field_value('mobile', contact_param.mobilephone)
         self.change_field_value('work', contact_param.workphone)
-        self.change_field_value('fax', contact_param.secondphone)
+        self.change_field_value('phone2', contact_param.secondphone)
 
     def change_field_value(self, field_name, field_value):
         wd = self.app.wd
@@ -135,6 +135,5 @@ class ContactHelper:
                 list_phones = all_phones.splitlines()    # получаем список по строкам
                 self.contact_cache.append(Contact(cont_id=index, firstname=f_name, lastname=l_name,
                                                   homephone=list_phones[0], mobilephone=list_phones[1],
-                                                  workphone=list_phones[2]))
-                # , faxphone=list_phones[3]
+                                                  workphone=list_phones[2], secondphone=list_phones[3]))
         return self.contact_cache

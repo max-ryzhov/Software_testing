@@ -7,7 +7,12 @@ def test_phones_on_home_page(app):
     assert contact_from_home_page.homephone == clear(contact_from_edit_page.homephone)
     assert contact_from_home_page.workphone == clear(contact_from_edit_page.workphone)
     assert contact_from_home_page.mobilephone == clear(contact_from_edit_page.mobilephone)
-    #assert contact_from_home_page.secondphone == clear(contact_from_edit_page.secondphone)
+    assert contact_from_home_page.secondphone == clear(contact_from_edit_page.secondphone)
+    print()
+    print(f'{contact_from_home_page.homephone} = {clear(contact_from_edit_page.homephone)}')
+    print(f'{contact_from_home_page.workphone} = {clear(contact_from_edit_page.workphone)}')
+    print(f'{contact_from_home_page.mobilephone} = {clear(contact_from_edit_page.mobilephone)}')
+    print(f'{contact_from_home_page.secondphone} = {clear(contact_from_edit_page.secondphone)}')
 
 
 def test_phones_on_contact_view(app):
@@ -16,11 +21,12 @@ def test_phones_on_contact_view(app):
     assert contact_from_view_page.homephone == contact_from_edit_page.homephone
     assert contact_from_view_page.workphone == contact_from_edit_page.workphone
     assert contact_from_view_page.mobilephone == contact_from_edit_page.mobilephone
-    #assert contact_from_view_page.secondphone == contact_from_edit_page.secondphone
+    assert contact_from_view_page.secondphone == contact_from_edit_page.secondphone
     print()
     print(f'{contact_from_view_page.homephone} = {contact_from_edit_page.homephone}')
     print(f'{contact_from_view_page.workphone} = {contact_from_edit_page.workphone}')
     print(f'{contact_from_view_page.mobilephone} = {contact_from_edit_page.mobilephone}')
+    print(f'{contact_from_view_page.secondphone} = {contact_from_edit_page.secondphone}')
 
 
 def clear(s):
