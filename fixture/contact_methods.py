@@ -1,4 +1,5 @@
 from time import sleep
+import re
 from model.contact_construct import Contact
 
 
@@ -34,14 +35,24 @@ class ContactHelper:
 
     def open_contact_edit_page_by_index(self, index):
         wd = self.app.wd
+        self.app.open_home_page()
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
 
     def view_contact_by_index(self, index):
         wd = self.app.wd
         self.app.open_home_page()
-        row = wd.find_elements_by_name('entry')[index]    # выбрал ряд
+        row = wd.find_elements_by_name('entry')[index]   # выбрал ряд
         row.find_element_by_xpath(".//td[7]").click()    # кнопка просмотр в 7м столбце
-        sleep(2)
+
+    def get_contact_from_view_page(self, index):
+        wd = self.app.wd
+        self.view_contact_by_index(index)
+        text = wd.find_element_by_id('content').text
+        homephone = re.search('H: (.*)', text).group(1)
+        workphone = re.search('W: (.*)', text).group(1)
+        mobilephone = re.search('M: (.*)', text).group(1)
+#        faxphone =  = re.search('P: (.*)', text).group(1)
+        return Contact(homephone=homephone, workphone=workphone, mobilephone=mobilephone)
 
     def get_contact_from_edit_page(self, index):
         wd = self.app.wd
@@ -54,7 +65,7 @@ class ContactHelper:
         mobilephone = wd.find_element_by_name('mobile').get_attribute('value')
         faxphone = wd.find_element_by_name('fax').get_attribute('value')
         return Contact(firstname=firstname, lastname=lastname, cont_id=cont_id,
-                       homephone=homephone, workphone=workphone, mobilephone=mobilephone, faxphone=faxphone)
+                       homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondphone=faxphone)
 
     def fill_contact_form(self, contact_param):
         wd = self.app.wd
@@ -69,7 +80,7 @@ class ContactHelper:
         self.change_field_value('home', contact_param.homephone)
         self.change_field_value('mobile', contact_param.mobilephone)
         self.change_field_value('work', contact_param.workphone)
-        self.change_field_value('fax', contact_param.faxphone)
+        self.change_field_value('fax', contact_param.secondphone)
 
     def change_field_value(self, field_name, field_value):
         wd = self.app.wd
