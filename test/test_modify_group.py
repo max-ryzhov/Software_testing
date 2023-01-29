@@ -30,5 +30,3 @@ def test_modify_group_name2(app):
     assert len(old_groups) == len(new_groups)
     old_groups[0] = mod_group
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
-
-

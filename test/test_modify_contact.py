@@ -6,7 +6,7 @@ from model.contact_construct import Contact
 def test_update_contact(app):
     if app.contact.count() == 0:
         app.contact.create(Contact(firstname="Default", lastname="User", address="for_modification"))
-    mod_contact = Contact(firstname="mod_name", lastname="mod_lastname", address="mod_address", mobile="+0000",
+    mod_contact = Contact(firstname="mod_name", lastname="mod_lastname", address="mod_address", mobilephone="+0000",
                           email="mod@gmail.com", title_user='Good')
     old_contacts = app.contact.get_contact_list()
     index = randrange(len(old_contacts))

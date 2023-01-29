@@ -3,7 +3,8 @@ from sys import maxsize
 
 class Contact:
     def __init__(self, cont_id=None, firstname=None, lastname=None, middlename=None, nickname=None, title_user=None,
-                 address=None, company=None, mobile=None, email=None):
+                 address=None, company=None, email=None, email2=None, email3=None, all_phones_from_hp=None,
+                 all_emails_from_hp=None, mobilephone=None, homephone=None, workphone=None, secondphone=None):
         self.cont_id = cont_id
         self.firstname = firstname
         self.lastname = lastname
@@ -12,11 +13,18 @@ class Contact:
         self.title_user = title_user
         self.address = address
         self.company = company
-        self.mobile = mobile
         self.email = email
+        self.email2 = email2
+        self.email3 = email3
+        self.mobilephone = mobilephone
+        self.homephone = homephone
+        self.workphone = workphone
+        self.secondphone = secondphone
+        self.all_phones_from_hp = all_phones_from_hp
+        self.all_emails_from_hp = all_emails_from_hp
 
     def __repr__(self):
-        return f'{self.cont_id}:{self.firstname}:{self.lastname}'
+        return f'{self.cont_id}:{self.firstname}:{self.lastname}:{self.homephone}:{self.workphone}'
 
     # переопределяем сравнение. в кач. агрументов передаем self-объект и other-объект
     def __eq__(self, other):
