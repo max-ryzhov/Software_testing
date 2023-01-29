@@ -132,8 +132,13 @@ class ContactHelper:
                 f_name = element.find_element_by_xpath(".//td[3]").text
                 l_name = element.find_element_by_xpath(".//td[2]").text
                 all_phones = element.find_element_by_xpath(".//td[6]").text    # получаем строку с 4 переносами
-                list_phones = all_phones.splitlines()    # получаем список по строкам
                 self.contact_cache.append(Contact(cont_id=index, firstname=f_name, lastname=l_name,
-                                                  homephone=list_phones[0], mobilephone=list_phones[1],
-                                                  workphone=list_phones[2], secondphone=list_phones[3]))
+                                                  all_phones_from_hp=all_phones))
         return self.contact_cache
+
+
+
+
+# list_phones = all_phones.splitlines()    # получаем список по строкам
+# homephone=list_phones[0], mobilephone=list_phones[1],
+# workphone=list_phones[2], secondphone=list_phones[3]))
