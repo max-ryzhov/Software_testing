@@ -64,8 +64,12 @@ class ContactHelper:
         workphone = wd.find_element_by_name('work').get_attribute('value')
         mobilephone = wd.find_element_by_name('mobile').get_attribute('value')
         secondphone = wd.find_element_by_name('phone2').get_attribute('value')
+        email = wd.find_element_by_name('email').get_attribute('value')
+        email2 = wd.find_element_by_name('email2').get_attribute('value')
+        email3 = wd.find_element_by_name('email3').get_attribute('value')
         return Contact(firstname=firstname, lastname=lastname, cont_id=cont_id,
-                       homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondphone=secondphone)
+                       homephone=homephone, workphone=workphone, mobilephone=mobilephone, secondphone=secondphone,
+                       email=email, email2=email2, email3=email3)
 
     def fill_contact_form(self, contact_param):
         wd = self.app.wd
@@ -77,6 +81,8 @@ class ContactHelper:
         self.change_field_value('address', contact_param.address)
         self.change_field_value('company', contact_param.company)
         self.change_field_value('email', contact_param.email)
+        self.change_field_value('email2', contact_param.email2)
+        self.change_field_value('email3', contact_param.email3)
         self.change_field_value('home', contact_param.homephone)
         self.change_field_value('mobile', contact_param.mobilephone)
         self.change_field_value('work', contact_param.workphone)
@@ -132,8 +138,9 @@ class ContactHelper:
                 f_name = element.find_element_by_xpath(".//td[3]").text
                 l_name = element.find_element_by_xpath(".//td[2]").text
                 all_phones = element.find_element_by_xpath(".//td[6]").text    # получаем строку с 4 переносами
+                all_emails = element.find_element_by_xpath(".//td[5]").text    # получаем строку с 4 переносами
                 self.contact_cache.append(Contact(cont_id=index, firstname=f_name, lastname=l_name,
-                                                  all_phones_from_hp=all_phones))
+                                                  all_phones_from_hp=all_phones, all_emails_from_hp=all_emails))
         return self.contact_cache
 
 
