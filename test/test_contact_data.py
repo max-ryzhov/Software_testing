@@ -1,16 +1,15 @@
 import re
 
 
-def test_phones_on_home_page(app):
+def test_compare_view_and_edit_form(app):
     contact_from_home_page = app.contact.get_contact_list()[0]
     contact_from_edit_page = app.contact.get_contact_from_edit_page(0)
     assert contact_from_home_page.all_phones_from_hp == merge_phones_like_on_homepage(contact_from_edit_page)
-
-
-def test_email_on_home_page(app):
-    contact_from_home_page = app.contact.get_contact_list()[0]
-    contact_from_edit_page = app.contact.get_contact_from_edit_page(0)
     assert contact_from_home_page.all_emails_from_hp == merge_emails_like_on_homepage(contact_from_edit_page)
+    # firstname/lastname добавил clear (в firstname ругается, если на edit_page пробел сзади)
+    assert clear(contact_from_home_page.firstname) == clear(contact_from_edit_page.firstname)
+    assert clear(contact_from_home_page.lastname) == clear(contact_from_edit_page.lastname)
+    assert contact_from_home_page.address == contact_from_edit_page.address
 
 
 def clear(s):
