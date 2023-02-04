@@ -9,7 +9,7 @@ class Group:
         self.group_id = group_id
 
     def __repr__(self):
-        return f'{self.group_id}:{self.group_name}'
+        return f'{self.group_id}:{self.group_name}:{self.header}:{self.footer}'
 
     def __eq__(self, other):
         return (self.group_id == other.group_id or self.group_id is None or other.group_id is None) \

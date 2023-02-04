@@ -17,8 +17,6 @@ def test_compare_view_and_edit_form(app):
     assert clear_spaces(contact_from_home_page.firstname) == clear_spaces(contact_from_edit_page.firstname)
     assert clear_spaces(contact_from_home_page.lastname) == clear_spaces(contact_from_edit_page.lastname)
     assert contact_from_home_page.address == contact_from_edit_page.address
-    print()
-    print(random_id, contact_from_home_page, contact_from_edit_page)
 
 
 def clear_phones(s):
