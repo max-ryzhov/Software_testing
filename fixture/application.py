@@ -1,4 +1,4 @@
-from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.group_methods import GroupHelper
 from fixture.contact_methods import ContactHelper
@@ -6,10 +6,15 @@ from fixture.contact_methods import ContactHelper
 
 class Application:
 
-    def __init__(self):
-        self.wd = WebDriver()  # ссылка на веб-драйвер
-#        self.wd.implicitly_wait(2)
-        # ссылки на помощники:
+    def __init__(self, browser='chrome'):
+        if browser == 'chrome':
+            self.wd = webdriver.Chrome()
+        elif browser == 'firefox':
+            self.wd = webdriver.Firefox()
+        elif browser == 'ie':
+            self.wd = webdriver.Ie()
+        else:
+            raise ValueError(f'Unrecognised browser {browser}')
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)

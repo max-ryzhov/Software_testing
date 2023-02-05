@@ -9,7 +9,9 @@ fixture = None    # вводим глобальную переменную, по
 def app(request):
     global fixture    # пробрасываем переменную в область видимости функции
     if fixture is None:   # проверяем создана ли фикстура. если нет - создаем
-        fixture = Application()
+        # извлекаем браузер, заданный в командной строке через объект-request
+        browser = request.config.getoption('--browser')
+        fixture = Application(browser=browser)
     else:
         if not fixture.isvalid():    # проверяем валидна ли фикстура. isvalid задана в application
             fixture = Application()
@@ -24,3 +26,9 @@ def stop(request):
         fixture.destroy()
     request.addfinalizer(fin)
     return fixture
+
+
+# hook(зацепка), в нашем случае парсер командной строки
+def pytest_addoption(parser):
+    # задать опции парсеру: имя параметра,  что сделать, значение по умолчанию
+    parser.addoption('--browser', action='store', default='chrome')
