@@ -142,10 +142,3 @@ class ContactHelper:
                 self.contact_cache.append(Contact(cont_id=index, firstname=f_name, lastname=l_name,
                                                   all_phones_from_hp=all_phones, all_emails_from_hp=all_emails))
         return self.contact_cache
-
-
-
-
-# list_phones = all_phones.splitlines()    # получаем список по строкам
-# homephone=list_phones[0], mobilephone=list_phones[1],
-# workphone=list_phones[2], secondphone=list_phones[3]))

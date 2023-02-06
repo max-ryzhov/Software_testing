@@ -7,7 +7,7 @@ import string
 
 # генератор случайных строк
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + string.punctuation + " " * 10
+    symbols = string.ascii_letters + string.digits
     random_str = "".join([random.choice(symbols) for symbol in range(random.randrange(maxlen))])
     return prefix + random_str
 
