@@ -15,7 +15,7 @@ def random_string(prefix, maxlen):
 # генератор тестовых данных
 test_data_group = [Group(group_name=random_string("name_", 10),
                          header=random_string("header_", 10),
-                         footer=random_string("footer_", 10)) for i in range(5)]
+                         footer=random_string("footer_", 10)) for i in range(1)]
 
 
 # название параметра, в кот. передаются данные; тестовые данные; строковое представление данных для отчета;
