@@ -10,6 +10,7 @@ FF 109.0.1,        geckodriver-v0.32.1
 IE 11.0.96,        IEDriverServer_x64_4.8.0
 """
 # C:\Users\Max\Python_QA\Software_testing\venv\Scripts\activate
+# py.test --browser=firefox --target=target.json ./test/test_add_contact.py
 
 
 class Application:
@@ -23,7 +24,7 @@ class Application:
             self.wd = webdriver.Ie()
         else:
             raise ValueError(f'Unrecognised browser {browser}')
-        self.wd.implicitly_wait(0)
+        self.wd.implicitly_wait(2)
         self.base_url = base_url
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
