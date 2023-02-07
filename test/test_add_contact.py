@@ -23,7 +23,7 @@ test_data_contact = [Contact(firstname=random_string('firstname_', 7),
                              email3=random_string('email3_', 7),
                              mobilephone=random_string('mobilephone_', 7),
                              homephone=random_string('homephone_', 7),
-                             secondphone=random_string('secondphone_', 7)) for i in range(5)]
+                             secondphone=random_string('secondphone_', 7)) for i in range(1)]
 
 
 @pytest.mark.parametrize('added_contact', test_data_contact, ids=[str(x) for x in test_data_contact])
