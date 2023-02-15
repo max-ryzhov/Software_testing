@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 from model.group_construct import Group
+# from data.add_group import constant as test_data_group
+from data.add_group import test_data_group
 import pytest
-import random
-import string
 
 
-# генератор случайных строк
-def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits
-    random_str = "".join([random.choice(symbols) for symbol in range(random.randrange(maxlen))])
-    return prefix + random_str
-
-
-# генератор тестовых данных
-test_data_group = [Group(group_name=random_string("name_", 10),
-                         header=random_string("header_", 10),
-                         footer=random_string("footer_", 10)) for i in range(1)]
+# # генератор случайных строк
+# def random_string(prefix, maxlen):
+#     symbols = string.ascii_letters + string.digits
+#     random_str = "".join([random.choice(symbols) for symbol in range(random.randrange(maxlen))])
+#     return prefix + random_str
+#
+#
+# # генератор тестовых данных
+# test_data_group = [Group(group_name=random_string("name_", 10),
+#                          header=random_string("header_", 10),
+#                          footer=random_string("footer_", 10)) for i in range(1)]
 
 
 # название параметра, в кот. передаются данные; тестовые данные; строковое представление данных для отчета;
@@ -27,9 +27,6 @@ def test_add_group(app, group):
     new_groups = app.group.get_group_list()
     old_groups.append(group)
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
-
-
-
 
     # генератор тестовых наборов
     # test_data = [Group(group_name=name, header=header, footer=footer)
