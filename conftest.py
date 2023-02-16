@@ -47,7 +47,7 @@ def pytest_addoption(parser):
     parser.addoption('--browser', action='store', default='chrome')
     parser.addoption('--target', action='store', default='target.json')
 
-
+# фикстура - динамическое связывание тестовых функций(теста) и тестовых данных
 def pytest_generate_tests(metafunc):
     # собираем инфу о всех фикстурах, исп в тесте
     for fixture in metafunc.fixturenames:

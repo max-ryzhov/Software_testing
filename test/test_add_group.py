@@ -24,6 +24,7 @@ from model.group_construct import Group
 # @pytest.mark.parametrize('group', test_data_group, ids=[str(x) for x in test_data_group])
 # def test_add_group(app, group):
 
+# вариант реализации - динамическое связывание тестовых функций(теста) и тестовых данных с помощью фикстуры data_groups
 def test_add_group(app, data_groups):
     group = data_groups
     old_groups = app.group.get_group_list()
@@ -32,6 +33,10 @@ def test_add_group(app, data_groups):
     new_groups = app.group.get_group_list()
     old_groups.append(group)
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+
+
+
+
 
     # генератор тестовых наборов
     # test_data = [Group(group_name=name, header=header, footer=footer)
