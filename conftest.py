@@ -3,6 +3,7 @@ import json
 import pytest
 import json
 import os.path
+import importlib
 from fixture.application import Application
 
 fixture = None  # вводим глобальную переменную, по умолчанию None
@@ -45,3 +46,18 @@ def pytest_addoption(parser):
     # задать опции парсеру: имя параметра,  что сделать, значение по умолчанию
     parser.addoption('--browser', action='store', default='chrome')
     parser.addoption('--target', action='store', default='target.json')
+
+
+def pytest_generate_tests(metafunc):
+    # собираем инфу о всех фикстурах, исп в тесте
+    for fixture in metafunc.fixturenames:
+        if fixture.startswith('data_'):    # обрабатываем только фикструры, начинающиеся на data_
+            testdata = load_from_module(fixture[5:])    # тестовые данные. удалить первые 5 символов
+            # параметризовываем тест: в фикстуру(начинающуюся с _data) добавляем данные testdata, ids - красивое
+            # строковое
+            # представление
+            metafunc.parametrize(fixture, testdata, ids=[str(x) for x in testdata])
+
+
+def load_from_module(module):
+    return importlib.import_module(f'data.{module}').testdata

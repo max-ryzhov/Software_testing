@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from model.group_construct import Group
+
+
 # from data.add_group import constant as test_data_group
-from data.add_group import test_data_group
-import pytest
+# from data.groups import test_data_group
+# import pytest
 
 
 # # генератор случайных строк
@@ -18,9 +20,12 @@ import pytest
 #                          footer=random_string("footer_", 10)) for i in range(1)]
 
 
-# название параметра, в кот. передаются данные; тестовые данные; строковое представление данных для отчета;
-@pytest.mark.parametrize('group', test_data_group, ids=[str(x) for x in test_data_group])
-def test_add_group(app, group):
+# # название параметра, в кот. передаются данные; тестовые данные; строковое представление данных для отчета;
+# @pytest.mark.parametrize('group', test_data_group, ids=[str(x) for x in test_data_group])
+# def test_add_group(app, group):
+
+def test_add_group(app, data_groups):
+    group = data_groups
     old_groups = app.group.get_group_list()
     app.group.create(group)
     assert len(old_groups) + 1 == app.group.count()  # сначала проверка по хэшу - по длине списка, без извлечения св-в
