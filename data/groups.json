@@ -1,32 +1,16 @@
 [
   {
-    "group_name": "name_ZcdG4C",
-    "header": "header_Jb7xcv2R",
-    "footer": "footer_wYKI",
+    "py/object": "model.group_construct.Group",
+    "group_name": "name_r4ORGmK2E",
+    "header": "header_ny7z1u",
+    "footer": "footer_",
     "group_id": null
   },
   {
-    "group_name": "name_LrSyNIm",
-    "header": "header_f9",
-    "footer": "footer_EVeSeGs",
-    "group_id": null
-  },
-  {
-    "group_name": "name_xO5fQ5",
-    "header": "header_O865zt0h",
-    "footer": "footer_U9gR",
-    "group_id": null
-  },
-  {
-    "group_name": "name_l6jYisM",
-    "header": "header_7nqi",
-    "footer": "footer_bT",
-    "group_id": null
-  },
-  {
-    "group_name": "name_uKtGGs",
-    "header": "header_KWj",
-    "footer": "footer_7w",
+    "py/object": "model.group_construct.Group",
+    "group_name": "name_hJnF5LrXX",
+    "header": "header_Buitj5Wf",
+    "footer": "footer_NNSXY73",
     "group_id": null
   }
 ]
