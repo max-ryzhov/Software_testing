@@ -69,4 +69,3 @@ def load_from_json(file):
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), f'data/{file}.json')) as f_json:
         print(f'data/{file}.json')
         return jsonpickle.decode(f_json.read())
-
