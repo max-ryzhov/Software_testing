@@ -1,4 +1,6 @@
 import pymysql.cursors
+from fixture.db import DbFixture
+
 # PyMySQL - драйвер для СУБД MySQL
 
 

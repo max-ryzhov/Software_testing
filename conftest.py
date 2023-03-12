@@ -40,9 +40,6 @@ def app(request):
     return fixture
 
 
-
-
-
 @pytest.fixture(scope='session')
 def db(request):    # фикстура подключения к DB
     db_config = load_config(request.config.getoption('--target'))['db']
@@ -54,9 +51,6 @@ def db(request):    # фикстура подключения к DB
         dbfixture.destroy()
     request.addfinalizer(fin)
     return dbfixture
-
-
-
 
 
 @pytest.fixture(scope='session', autouse=True)
