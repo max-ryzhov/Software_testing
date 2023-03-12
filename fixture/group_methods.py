@@ -43,9 +43,15 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
+    # выбор групп по порядковому номеру ui
     def select_group_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    # выбор групп по group_id
+    def select_group_by_id(self, group_id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector('input[value="%s"]' % group_id).click()
 
     def fill_group_form(self, group_param):
         wd = self.app.wd
@@ -64,15 +70,28 @@ class GroupHelper:
         wd = self.app.wd
         self.delete_by_index(0)
 
+    # удаление групп по порядковому номеру ui
     def delete_by_index(self, index):
         wd = self.app.wd
         self.open_group_page()
-        # select first group
         self.select_group_by_index(index)
         # submit deletion
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
         self.group_cache = None
+
+    # удаление групп по group_id
+    def delete_by_id(self, group_id):
+        wd = self.app.wd
+        self.open_group_page()
+        self.select_group_by_id(group_id)
+        # submit deletion
+        wd.find_element_by_name("delete").click()
+        self.return_to_group_page()
+        self.group_cache = None
+
+
+
 
     def return_to_group_page(self):
         wd = self.app.wd
