@@ -8,8 +8,8 @@ class DbFixture:
         self.name = name
         self.user = user
         self.password = password
-        self.connection = pymysql.connect(host=host, user=user, password=password, database=name)
-        # cursorclass=pymysql.cursors.DictCursor)
+        # autocommit - отключает встроенное кэширование базы данных
+        self.connection = pymysql.connect(host=host, user=user, password=password, database=name, autocommit=True)
 
     def get_group_list(self):
         lst = []
