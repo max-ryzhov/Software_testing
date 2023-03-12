@@ -19,17 +19,10 @@ class DbFixture:
 #            for row in cursor.fetchall():  # cursor.fetchall вывести данные в виде списка
             for row in cursor.fetchall():
                 (id, name, header, footer) = row
-                lst.append(Group(id=id, name=name, header=header, footer=footer))
+                lst.append(Group(group_id=str(id), group_name=name, header=header, footer=footer))
         finally:
             cursor.close()
         return lst
-
-
-
-
-
-
-
 
     def destroy(self):
         self.connection.close()
