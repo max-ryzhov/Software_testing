@@ -1,31 +1,13 @@
 import pymysql.cursors
-from fixture.db import DbFixture
-
-# PyMySQL - драйвер для СУБД MySQL
+from fixture.orm import ORMFixture
 
 
-# Connect to the database
-connection = pymysql.connect(host='localhost',
-                             user='root',
-                             password='',
-                             database='addressbook',
-                             cursorclass=pymysql.cursors.DictCursor)
+db = ORMFixture(host='localhost', name='addressbook', user='root', password='')
 
 try:
-    cursor = connection.cursor()    # cursor - указатель на данные в базе.
-    cursor.execute('select * from group_list where group_id=410')    # cursor.execute извлечь данные
-    for row in cursor.fetchall():    # cursor.fetchall вывести данные в виде строки
-        print(row)
+    lst = db.get_group_list()
+    for item in lst:
+        print(item)
+    print(len(lst))
 finally:
-    connection.close()
-
-
-
-
-
-# with connection:
-#     with connection.cursor() as cursor:
-#
-#         # Create a new record
-#         sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"
-#         cursor.execute(sql, ('webmaster@python.org', 'very-secret'))
+    pass    # db.destroy() - сессии автоматически закрываются ORM
