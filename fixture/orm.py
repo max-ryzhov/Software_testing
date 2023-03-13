@@ -4,7 +4,7 @@ from model.group_construct import Group
 from model.contact_construct import Contact
 
 
-# ПОНИ БУДЕТ ПЕРЕВРДИТЬ НА ЯЗЫК SQL-запросов
+# ПОНИ БУДЕТ ПЕРЕВОДИТЬ НА ЯЗЫК SQL-запросов
 class ORMFixture:
     db = Database()
 
@@ -41,3 +41,4 @@ class ORMFixture:
     @db_session  # помечаем что открывается сессия
     def get_group_list(self):
         return self.convert_groups_to_model(select(g for g in ORMFixture.ORMGroup))
+
