@@ -7,7 +7,7 @@ from model.contact_construct import Contact
 db = ORMFixture(host='localhost', name='addressbook', user='root', password='')
 
 try:
-    lst = db.get_contacts_in_group(Group(group_id='327'))
+    lst = db.get_contacts_not_in_group(Group(group_id='327'))
     for item in lst:
         print(item)
     print(len(lst))
