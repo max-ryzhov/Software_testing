@@ -1,32 +1,27 @@
 # -*- coding: utf-8 -*-
-from random import randrange
+import random
 from model.group_construct import Group
 
 
-def test_modify_group_name(app):
-    mod_group = Group(group_name="Modified name")
-    if app.group.count() == 0:
+def test_modify_group(app, db):    # передаем фикстуру db в кач параметра
+    if len(db.get_group_list()) == 0:
         app.group.create(Group(group_name="For modify"))
-    old_groups = app.group.get_group_list()
-    index = randrange(len(old_groups))
-    mod_group.group_id = old_groups[index].group_id    # по умолчанию id в mod_group - None. Присваиваю id 1й группы.
-    app.group.modify_group_by_index(index, mod_group)    # модифицирую 1ю группу
-    assert len(old_groups) == app.group.count()    # кол-во групп не изменилось
 
-    new_groups = app.group.get_group_list()  # подтягиваю фактический список групп с веб станицы после модификации
-    old_groups[index] = mod_group    # формирую список путем замены 1й группы старого списка на mod_group
+    mod_group = Group(group_name="Modified name6", header='Mod_header6', footer='Mod_footer6')    # new_group_param
+    # загрузил начальный список групп из БД
+    old_groups = db.get_group_list()
+    # выбрал рандомную группу для модификации
+    group = random.choice(old_groups)
+    # сохранил id выбранной группы и ее индекс в БД
+    mod_group_id = group.group_id
+    mod_group_index = old_groups.index(group)
+    # модифицировал группу в браузере по id
+    app.group.modify_group_by_id(mod_group_id, mod_group)
+    # вернул модифицированной группе id-шник
+    mod_group.group_id = mod_group_id
+    # загрузил обновленный список из БД
+    new_groups = db.get_group_list()
+    # заменил в старом списке начальную группу на модифицированную по mod_group_index
+    old_groups[mod_group_index] = mod_group
     # сравниваем список, "какой должен быть по коду", с фактическим списком с веб страницы
-    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
-
-
-def test_modify_group_name2(app):
-    mod_group = Group(group_name="Second modification")
-    if app.group.count() == 0:
-        app.group.create(Group(group_name="For modify2"))
-    old_groups = app.group.get_group_list()
-    mod_group.group_id = old_groups[0].group_id
-    app.group.modify_first_group(mod_group)
-    new_groups = app.group.get_group_list()
-    assert len(old_groups) == len(new_groups)
-    old_groups[0] = mod_group
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
