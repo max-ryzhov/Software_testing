@@ -6,30 +6,51 @@ import jsonpickle
 import os.path
 import importlib
 from fixture.application import Application
+from fixture.db import DbFixture
 
 fixture = None  # вводим глобальную переменную, по умолчанию None
 target = None  # вводим глобальную переменную, по умолчанию None
 
 
-@pytest.fixture
-def app(request):
-    global fixture  # пробрасываем переменную в область видимости функции
+# функция, загружающая данные авторизации из target.json для app и db
+def load_config(file):
     global target  # пробрасываем переменную в область видимости функции
-    browser = request.config.getoption('--browser')  # извлекаем тип браузер заданных параметров
     if target is None:  # проверяем, прочитан ли конф.файл
         # определение пути к файлу target.json относительно директории проекта
         # os.path.abspath(__file__) - абсолютный путь до файла conftest.py
         # os.path.dirname(os.path.abspath(__file__) - абс. путь до директории, содер. conftest.py (директории проекта)
         # os.path.join() - абс.путь до директории проекта + отностительный путь до target.json
-        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption('--target'))
+        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
         with open(config_file) as f:  # открываем кон.файл target.json в менеджере контекста with, как f
             target = json.load(f)  # читаем содержание f (target.json)
+    return target
+
+
+@pytest.fixture
+def app(request):
+    global fixture  # пробрасываем переменную в область видимости функции
+    browser = request.config.getoption('--browser')  # извлекаем тип браузер заданных параметров
+    # web_config - данные для веб-авторизации, извлеченные из блока web файла target.json
+    web_config = load_config(request.config.getoption('--target'))['web']
     if fixture is None or not fixture.isvalid():  # проверяем создана и валидна ли фикстура
         # извлекаем браузер, заданный в командной строке из объект-request, и base_url из target.json
-        fixture = Application(browser=browser, base_url=target['baseUrl'])
-        # создание сессии с именем и паролем из target.json
-    fixture.session.ensure_login(user_name=target["user_name"], password=target["password"])
+        fixture = Application(browser=browser, base_url=web_config['baseUrl'])
+        # создание сессии с именем и паролем из блока web файла target.json
+    fixture.session.ensure_login(user_name=web_config["user_name"], password=web_config["password"])
     return fixture
+
+
+@pytest.fixture(scope='session')
+def db(request):    # фикстура подключения к DB
+    db_config = load_config(request.config.getoption('--target'))['db']
+    dbfixture = DbFixture(host=db_config["host"],
+                          name=db_config["name"],
+                          user=db_config["user"],
+                          password=db_config["password"])
+    def fin():
+        dbfixture.destroy()
+    request.addfinalizer(fin)
+    return dbfixture
 
 
 @pytest.fixture(scope='session', autouse=True)

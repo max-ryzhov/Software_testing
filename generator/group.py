@@ -18,7 +18,7 @@ except getopt.GetoptError as err:
     sys.exit(2)
 
 # значение параметров генератора по умолчанию
-n = 2
+n = 5
 f = 'data/groups.json'
 
 # обработчик значений опций -n и -f
