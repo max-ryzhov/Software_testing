@@ -33,6 +33,24 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
+    def modify_contact_by_id(self, mod_contact_id, contact_param):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.open_contact_edit_page_by_id(mod_contact_id)
+        self.fill_contact_form(contact_param)
+        wd.find_element_by_xpath("//div[@id='content']/form/input[22]").click()
+        self.return_to_home_page()
+        self.contact_cache = None
+
+    def open_contact_edit_page_by_id(self, mod_contact_id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_xpath(f'//a[@href="edit.php?id={mod_contact_id}"]').click()
+
+    # def select_group_by_id(self, group_id):
+    #     wd = self.app.wd
+    #     wd.find_element_by_css_selector('input[value="%s"]' % group_id).click()
+
     def open_contact_edit_page_by_index(self, index):
         wd = self.app.wd
         self.app.open_home_page()
