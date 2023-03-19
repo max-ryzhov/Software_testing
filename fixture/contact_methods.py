@@ -108,6 +108,22 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
+    # удаление контактов по group_id
+    def delete_contact_by_id(self, con_id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.select_contact_by_id(con_id)
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to.alert.accept()
+        self.return_to_home_page()
+        self.contact_cache = None
+
+    # выбор контактов по group_id
+    def select_contact_by_id(self, con_id):
+        wd = self.app.wd
+        wd.find_element_by_id(con_id).click()
+
     def add_to_group(self):
         wd = self.app.wd
         self.app.open_home_page()
