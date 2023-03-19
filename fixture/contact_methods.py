@@ -137,7 +137,7 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
-    # выбор контактов по group_id
+    # выбор контактов по id
     def select_contact_by_id(self, con_id):
         wd = self.app.wd
         wd.find_element_by_id(con_id).click()
